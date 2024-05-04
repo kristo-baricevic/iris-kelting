@@ -1,6 +1,9 @@
 "use client";
 
 import React, { createContext, useState, useCallback, useEffect } from "react";
+import { fetchSongs } from "@/redux/actions";
+import { useDispatch } from 'react-redux';
+
 import { Howl } from "howler";
 
 // Define the shape of your context state
@@ -10,7 +13,7 @@ interface AudioContextState {
   currentSongIndex: number;
   progress: number;
   currentSong: { [key: string]: Howl } | null;
-  trackLinerNotes: TrackLinerNotes;
+  trackLinerNotes: TrackLinerNotes[];
   nextSong: () => void;
   prevSong: () => void;
   isMuted: boolean[];
@@ -306,7 +309,8 @@ export const AudioPlayerContext = createContext<AudioContextState | undefined>(
 );
 
 export const AudioProvider: React.FC<AudioProviderProps> = ({ children }) => {
-  const [message, setMessage] = useState(null);
+  const dispatch = useDispatch();
+  // const [message, setMessage] = useState(null);
 
   const [currentTrack, setCurrentTrack] = useState<CurrentTrackState>({
     song: null,
@@ -322,11 +326,8 @@ export const AudioProvider: React.FC<AudioProviderProps> = ({ children }) => {
       track3: false,
     });
 
-  const [trackLinerNotes, setTrackLinerNotes] = useState<TrackLinerNotes>({
-    id: 0,
-    title: "",
-    samples: [],
-  });
+  const [trackLinerNotes, setTrackLinerNotes] = useState<TrackLinerNotes[]>([]);
+
 
   const isLoading = Object.values(trackLoadingStatus).some((status) => status);
 
@@ -335,7 +336,7 @@ export const AudioProvider: React.FC<AudioProviderProps> = ({ children }) => {
 
   const loadSong = useCallback((songIndex: number) => {
     setTrackLoadingStatus({ track1: true, track2: true, track3: true });
-    const basePath = `/music/song${songIndex + 1}`;
+    const basePath = `http://localhost:8080/public/music/song${songIndex + 1}`;
     const newSong = {
       track1: new Howl({
         src: [`${basePath}/track1.mp3`],
@@ -356,27 +357,7 @@ export const AudioProvider: React.FC<AudioProviderProps> = ({ children }) => {
     setCurrentTrack((prev) => ({ ...prev, song: newSong, index: songIndex }));
 
     // fetch liner notes
-    fetch(`http://localhost:8080/api/songs/${songIndex + 1}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((songData) => {
-        if (songData) {
-          // setMessage(songData.title);
-          // setPeople(songData.people) // Uncomment or modify as needed
-          setTrackLinerNotes(songData);
-          return trackLinerNotes;
-        } else {
-          console.log("No song data available");
-          setMessage(null);
-        }
-      })
-      .catch((error) => {
-        console.error("Fetch error:", error);
-      });
+    dispatch(fetchSongs());
   }, []);
 
   const playPauseTracks = useCallback(() => {

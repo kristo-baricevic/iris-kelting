@@ -5,6 +5,8 @@ const PORT = 8080;
 
 const songRouter = require("./controllers/songController");
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(cors());
 
 app.get("/api/home", (req, res) => {

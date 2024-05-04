@@ -11,7 +11,6 @@ import {
   faMicrophone,
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
-import AudioProcessor from "./AudioProcessor";
 
 declare global {
   interface Window {
@@ -87,7 +86,7 @@ const MultiTrackPlayer = () => {
         <div className="music-info">
           <img
             className="cover-image"
-            src={`images/cover${currentSongIndex}.png`}
+            src={`http://localhost:8080/public/images/cover${currentSongIndex}.png`}
           />
           <div className="flex flex-col px-2">
             <h4 className="flex" ref={titleRef}>
@@ -162,9 +161,7 @@ const MultiTrackPlayer = () => {
             </button>
           ))}
         </div>
-        <div>
-          <AudioProcessor mp3FileUrl={audio.currentSong} />
-        </div>
+        <div>{/* <AudioProcessor mp3FileUrl={audio.currentSong} /> */}</div>
       </div>
     </>
   );
