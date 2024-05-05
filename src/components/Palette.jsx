@@ -1,6 +1,6 @@
 // Palette.js
 import Circle from './Circle';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // Import your local images
 import blue_bg from '../assets/city_purple.jpeg';
@@ -19,26 +19,43 @@ const colors = [
 ];
 
 const Palette = () => {
-  // Track the color currently being hovered over
+  // Track the current background state
   const [hoveredColor, setHoveredColor] = useState(null);
+  const timeoutRef = useRef(null);
+
+  // Preload all background images
+  useEffect(() => {
+    colors.forEach((colorObj) => {
+      const img = new Image();
+      img.src = colorObj.image;
+    });
+  }, []);
 
   // Update the body background image
   const updateBodyBackground = (colorName) => {
     const colorObject = colors.find((c) => c.name === colorName);
-    console.log(hoveredColor);
     if (colorObject) {
       const backgroundImage = colorObject.image;
       document.body.style.transition = 'background-image 1s ease-in-out';
       document.body.style.backgroundImage = `url(${backgroundImage})`;
       document.body.style.backgroundSize = 'cover';
       document.body.style.backgroundPosition = 'center';
+      document.body.style.backgroundRepeat = 'no-repeat';
     }
   };
 
   // Reset the body background image to its original state
   const resetBodyBackground = () => {
-    document.body.style.transition = 'background-image 1s ease-in-out';
-    document.body.style.backgroundImage = '';
+    // Clear any existing timeouts to avoid conflicting timers
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    // Set a timeout for the reset to occur after the transition
+    timeoutRef.current = setTimeout(() => {
+      document.body.style.transition = 'background-image 1s ease-in-out';
+      document.body.style.backgroundImage = '';
+    }, 200); 
   };
 
   return (
