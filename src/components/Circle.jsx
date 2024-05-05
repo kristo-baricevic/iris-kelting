@@ -9,9 +9,12 @@ const Circle = ({ color }) => {
     <div
         className="flex flex-row w-16 h-16 rounded-full cursor-pointer"
         style={{    backgroundColor: color, 
-            border: '3px solid red',  // Make the border red for visibility
-            height: '64px',           // Ensure height is explicitly set
-            width: '64px'
+            border: '1px solid black', 
+            height: '64px',           
+            width: '64px',
+            boxShadow: '0px 0px 5px 0px black',
+            transition: 'all 0.2s ease-in-out',
+            transform: isHovered? 'translateY(-10%)' : 'translateY(0%)',
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
