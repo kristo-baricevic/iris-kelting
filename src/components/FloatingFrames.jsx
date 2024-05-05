@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import gsap from 'gsap';
 
@@ -17,7 +17,7 @@ const preloadImages = (imageArray) => {
 }; 
 
 const FloatingFrames = () => {
-  // Map of background images associated with circle colors
+  // Background images mapping
   const backgroundImages = {
     red: background4,
     green: background5,
@@ -26,7 +26,10 @@ const FloatingFrames = () => {
     orange: background3,
   };
 
-  // Function to change the background image of the body
+  // Store the original body background
+  const originalBackground = useRef(document.body.style.backgroundImage);
+
+  // Change the body background image
   const changeBodyBackground = (bgImage) => {
     document.body.style.backgroundImage = `url(${bgImage})`;
     document.body.style.backgroundSize = 'cover';
@@ -34,7 +37,11 @@ const FloatingFrames = () => {
     document.body.style.transition = 'background-image 1s ease-in-out';
   };
 
-  // Preload background images
+  // Reset the body background to its original value
+  const resetBodyBackground = () => {
+    document.body.style.backgroundImage = originalBackground.current;
+  };
+
   useEffect(() => {
     const imageList = [background1, background2, background3, background4, background5];
     preloadImages(imageList);
@@ -67,20 +74,21 @@ const FloatingFrames = () => {
 
   // Photos with associated colors
   const photos = [
-    { color: 'red', src: background4 },
-    { color: 'green', src: background5 },
-    { color: 'blue', src: background1 },
-    { color: 'yellow', src: background2 },
-    { color: 'orange', src: background3 },
+    { color: 'red', src: 'https://via.placeholder.com/150/FF0000/FFFFFF?text=Photo1' },
+    { color: 'green', src: 'https://via.placeholder.com/150/00FF00/FFFFFF?text=Photo2' },
+    { color: 'blue', src: 'https://via.placeholder.com/150/0000FF/FFFFFF?text=Photo3' },
+    { color: 'yellow', src: 'https://via.placeholder.com/150/FFFF00/FFFFFF?text=Photo4' },
+    { color: 'orange', src: 'https://via.placeholder.com/150/FFA500/FFFFFF?text=Photo5' },
   ];
 
   return (
     <div className="absolute inset-0 flex justify-center items-center z-10">
       {photos.map((photo, index) => (
         <div
-          key={index} 
+          key={index}
           className="frame-container"
           onMouseEnter={() => changeBodyBackground(backgroundImages[photo.color])}
+          onMouseLeave={resetBodyBackground}
         >
           <img
             src={photo.src}
@@ -91,7 +99,6 @@ const FloatingFrames = () => {
       ))}
     </div>
   );
-  
 };
 
 FloatingFrames.propTypes = {
