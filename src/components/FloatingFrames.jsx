@@ -2,48 +2,96 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import gsap from 'gsap';
 
-const FloatingFrames = ({ color }) => {
+// Import your local images
+import background1 from '../assets/city_purple.jpeg';
+import background2 from '../assets/iris_butterfly.jpeg';
+import background3 from '../assets/iris_orange.jpeg';
+import background4 from '../assets/iris_red.jpeg';
+import background5 from '../assets/iris_green.jpeg';
+
+const preloadImages = (imageArray) => {
+    imageArray.forEach(image => {
+      const img = new Image();
+      img.src = image;
+    });
+}; 
+
+const FloatingFrames = () => {
+  // Map of background images associated with circle colors
+  const backgroundImages = {
+    red: background4,
+    green: background5,
+    blue: background1,
+    yellow: background2,
+    orange: background3,
+  };
+
+  // Function to change the background image of the body
+  const changeBodyBackground = (bgImage) => {
+    document.body.style.backgroundImage = `url(${bgImage})`;
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundPosition = 'center';
+    document.body.style.transition = 'background-image 1s ease-in-out';
+  };
+
+  // Preload background images
   useEffect(() => {
-    // Animation to move frames upwards from bottom to top
+    const imageList = [background1, background2, background3, background4, background5];
+    preloadImages(imageList);
+  }, []);
+  
+
+  // Animation to move frames upwards from bottom to top
+  useEffect(() => {
     gsap.fromTo(
       '.frame',
       {
-        y: window.innerHeight + 100, // Start just below the bottom of the screen
-        x: () => window.innerWidth / 2 - 200 + (Math.random() * 100 - 50), // Narrower scatter range centered
+        y: window.innerHeight + 100,
+        x: () => window.innerWidth / 2 - 100 + (Math.random() * 50 - 25),
         scale: 1,
         opacity: 0,
       },
       {
-        duration: 5.5, // Slow movement upwards
-        y: -180, // Move off the top of the screen
+        duration: 6,
+        y: -100,
         opacity: 1,
         ease: 'power1.inOut',
         stagger: {
-          each: 0.8, // Delay between each frame
-          repeat: -1, // Infinite loop
-          yoyo: false, // Frames will return to their starting position
+          each: 0.8,
+          repeat: -1,
+          yoyo: false,
         },
       }
     );
   }, []);
 
-  // Static array of photos for demonstration
-  const photos = [...Array(5)].map(
-    (_, index) => `https://via.placeholder.com/150/${color.slice(1)}/FFFFFF?text=Photo${index + 1}`
-  );
+  // Photos with associated colors
+  const photos = [
+    { color: 'red', src: background4 },
+    { color: 'green', src: background5 },
+    { color: 'blue', src: background1 },
+    { color: 'yellow', src: background2 },
+    { color: 'orange', src: background3 },
+  ];
 
   return (
-    <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center p-4">
+    <div className="absolute inset-0 flex justify-center items-center z-10">
       {photos.map((photo, index) => (
-        <img
-          key={index}
-          src={photo}
-          alt={`Photo ${index + 1}`}
-          className="frame shadow-md mx-1 object-cover"
-        />
+        <div
+          key={index} 
+          className="frame-container"
+          onMouseEnter={() => changeBodyBackground(backgroundImages[photo.color])}
+        >
+          <img
+            src={photo.src}
+            alt={`Photo ${index + 1}`}
+            className="frame shadow-md mx-1 w-16 h-16 object-cover"
+          />
+        </div>
       ))}
     </div>
   );
+  
 };
 
 FloatingFrames.propTypes = {

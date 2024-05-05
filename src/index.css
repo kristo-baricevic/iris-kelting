@@ -23,6 +23,7 @@ a:hover {
 }
 
 body {
+  transition: background-image 0.5s ease-in-out;
   margin: 0;
   display: flex;
   background-image: url('src/assets/iris_camera.png');
