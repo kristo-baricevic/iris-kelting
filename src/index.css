@@ -25,7 +25,6 @@ a:hover {
 body {
   transition: background-image 0.5s ease-in-out;
   margin: 0;
-  display: flex;
   background-image: url('src/assets/iris_camera.png');
   background-size: cover;
   background-position: center;
@@ -53,7 +52,7 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #f53434;
 }
 button:focus,
 button:focus-visible {
