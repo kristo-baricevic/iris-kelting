@@ -22,7 +22,6 @@ import green1 from '../assets/iris_green.jpeg';
 import green2 from '../assets/green2.jpeg';
 import green3 from '../assets/green3.jpeg';
 
-
 // Colors and multiple images
 const colors = [
   { name: 'red', images: [red1, red2, red3, red4] },
@@ -31,7 +30,6 @@ const colors = [
   { name: 'yellow', images: [yellow1, yellow2, yellow3, yellow4] },
   { name: 'orange', images: [orange1, orange2, orange3] },
 ];
-
 
 // Debounce utility function
 const debounce = (func, delay) => {
@@ -124,11 +122,27 @@ const Palette = () => {
           }}
         />
       ))}
-     <div className="flex justify-center align-middle mt-4 gap-6">
-        <button onClick={handlePrevious} className="flex justify-center border-solid border-black border-2 px-4 py-2 bg-orange-400 hover:bg-orange-500 rounded-full shadow-md">
+      <div className="flex justify-center align-middle mt-4 gap-6 text-black">
+        <button
+          onClick={handlePrevious}
+          style={{
+            backgroundColor: hoveredColor || "orange", 
+            transition: "background-color 0.5s ease-in-out, border-color 0.5s ease-in-out", // Transition for background and border color
+            border: "2px solid black",
+          }}
+          className="flex justify-center px-4 py-2 hover:opacity-80 rounded-full shadow-md"
+        >
           &larr; Previous
         </button>
-        <button onClick={handleNext} className="flex justify-center border-solid border-black border-2 px-4 py-2 bg-orange-400 hover:bg-orange-500 rounded-full shadow-md">
+        <button
+          onClick={handleNext}
+          style={{
+            backgroundColor: hoveredColor || "orange",
+            transition: "background-color 0.5s ease-in-out, border-color 0.5s ease-in-out", // Transition for background and border color
+            border: "2px solid black",
+          }}
+          className="flex justify-center px-4 py-2 hover:opacity-80 rounded-full shadow-md"
+        >
           Next &rarr;
         </button>
       </div>

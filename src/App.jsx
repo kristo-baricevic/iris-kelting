@@ -44,7 +44,7 @@ function App() {
         className="flex flex-col"
         style={{
           color: textColor,
-          transition: "color 0.5s ease-in-out" // Smooth transition for the text color
+          transition: "color 0.5s ease-in-out" 
         }}
       >
         <h1 className="text-left text-5xl font-extrabold">Iris Kelting</h1>
