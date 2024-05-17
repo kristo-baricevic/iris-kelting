@@ -1,4 +1,6 @@
 import Logo from './Logo';
+import logo from '../assets/logo.jpeg';
+
 
 const About = () => {
   return (
@@ -20,7 +22,7 @@ const About = () => {
               Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.
             </p>
             <div className="flex justify-center py-2">
-            <Logo />
+            <Logo image={logo}/>
             </div>
           </div>
         </div>

@@ -1,10 +1,8 @@
-import logo from '../assets/logo.jpeg';
-
-const Logo = () => {
+const Logo = ({image}) => {
   return (
     <div className="circleImage">
       <img 
-        src={logo} 
+        src={image} 
         alt="Logo"
         width={150} 
         height={150}
