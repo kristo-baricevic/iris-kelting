@@ -5,6 +5,7 @@ import Palette from './components/Palette';
 import About from './components/About';
 import Video from './components/Video';
 import Contact from './components/Contact';
+import Terms from './components/Terms';
 import './App.css';
 import { getTextColorForDynamicBackground } from './utils/backgroundUtils';
 
@@ -48,6 +49,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/video" element={<Video />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/terms" element={<Terms />} />
         </Routes>
       </div>
     </Router>
