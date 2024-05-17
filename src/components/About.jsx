@@ -1,9 +1,10 @@
+import Logo from './Logo';
 
 const About = () => {
   return (
     <div>
         <div className="text-left py-2">
-          <div className="card p-4">
+          <div className="about-card p-4">
               <h2 className="text-black text-xl">About</h2>
               <p className="text-black">
                 Iris Kelting is an artist based out of Chicago, IL.
@@ -18,6 +19,9 @@ const About = () => {
               <p className="text-black">
               Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.
             </p>
+            <div className="flex justify-center py-2">
+            <Logo />
+            </div>
           </div>
         </div>
     </div>

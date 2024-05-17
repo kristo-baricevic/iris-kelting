@@ -30,7 +30,7 @@ const ContactForm = () => {
 
   return (
     <div className="p-2">
-      <div className="card p-4">
+      <div className="contact-card p-4">
         <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -43,7 +43,7 @@ const ContactForm = () => {
               id="name"
               value={formData.name}
               onChange={handleChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required
             />
           </div>
@@ -57,7 +57,7 @@ const ContactForm = () => {
               id="email"
               value={formData.email}
               onChange={handleChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required
             />
           </div>
@@ -70,7 +70,7 @@ const ContactForm = () => {
               id="message"
               value={formData.message}
               onChange={handleChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               rows="4"
               required
             ></textarea>
