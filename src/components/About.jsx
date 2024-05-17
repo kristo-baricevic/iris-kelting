@@ -1,8 +1,14 @@
 import Logo from './Logo';
 import logo from '../assets/logo.jpeg';
+import { useEffect } from 'react';
 
 
 const About = () => {
+
+  useEffect(() => {
+    document.body.style.background = '#FFB347';
+  }, []);
+
   return (
     <div>
         <div className="text-left py-2">

@@ -1,8 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 
 const ContactForm = () => {
+
+  useEffect(() => {
+    document.body.style.background = '#77DD77'; 
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',

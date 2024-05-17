@@ -9,6 +9,7 @@ import Terms from './components/Terms';
 import './App.css';
 import { getTextColorForDynamicBackground } from './utils/backgroundUtils';
 
+
 function App() {
   const [textColor, setTextColor] = useState("white");
 
@@ -22,6 +23,7 @@ function App() {
   };
 
   useEffect(() => {
+       
     updateTextColor();
     const observer = new MutationObserver((mutations) => {
       for (const mutation of mutations) {

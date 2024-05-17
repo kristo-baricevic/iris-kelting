@@ -1,8 +1,14 @@
 import logo2 from '../assets/logo2.jpeg';
 import Logo from './Logo';
+import { useEffect } from 'react';
 
 const Video = () => {
+    useEffect(() => {
+        document.body.style.background = '#BBAACB'; 
+      }, []);
+    
   return (
+    
     <div>
         <div className="text-left py-2">
             <div className="card p-4">

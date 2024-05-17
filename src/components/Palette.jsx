@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import Circle from './Circle';
 import { getTextColorForDynamicBackground } from '../utils/backgroundUtils';
 import PropTypes from 'prop-types';
+import cameraImage from '../assets/iris_camera.png'; 
+
 
 // Import your local images
 import blue1 from '../assets/city_purple.jpeg';
@@ -44,6 +46,7 @@ const debounce = (func, delay) => {
 };
 
 const Palette = ({ setTextColor }) => {
+  
   const [hoveredColor, setHoveredColor] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const overlay1Ref = useRef(null);
@@ -52,6 +55,8 @@ const Palette = ({ setTextColor }) => {
 
   // Preload all background images
   useEffect(() => {
+    document.body.style.background = `url(${cameraImage}) no-repeat center center fixed`;
+    document.body.style.backgroundSize = 'cover'; 
     colors.forEach((colorObj) => {
       colorObj.images.forEach((image) => {
         const img = new Image();
