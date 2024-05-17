@@ -15,7 +15,7 @@ const Logo = ({image}) => {
 
 Logo.propTypes = {
     image: PropTypes.string.isRequired
-  };
+};
 
 export default Logo;
 

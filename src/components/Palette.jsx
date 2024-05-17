@@ -1,6 +1,7 @@
-// Palette.js
+import { useState, useEffect, useRef } from 'react';
 import Circle from './Circle';
-import { useState, useEffect } from 'react';
+import { getTextColorForDynamicBackground } from '../utils/backgroundUtils';
+import PropTypes from 'prop-types';
 
 // Import your local images
 import blue1 from '../assets/city_purple.jpeg';
@@ -42,10 +43,12 @@ const debounce = (func, delay) => {
   };
 };
 
-const Palette = () => {
-  // Track the currently hovered color and the current index
+const Palette = ({ setTextColor }) => {
   const [hoveredColor, setHoveredColor] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const overlay1Ref = useRef(null);
+  const overlay2Ref = useRef(null);
+  const [useOverlay1, setUseOverlay1] = useState(true);
 
   // Preload all background images
   useEffect(() => {
@@ -57,20 +60,31 @@ const Palette = () => {
     });
   }, []);
 
-  // Update the body background image with a delay
   const updateBodyBackground = debounce((colorName, index) => {
     const colorObject = colors.find((c) => c.name === colorName);
     if (colorObject) {
       const backgroundImage = colorObject.images[index];
-      document.body.style.transition = 'background-image 1s ease-in-out';
-      document.body.style.backgroundImage = `url(${backgroundImage})`;
-      document.body.style.backgroundSize = 'cover';
-      document.body.style.backgroundPosition = 'center';
-      document.body.style.backgroundRepeat = 'no-repeat';
+      if (useOverlay1) {
+        if (overlay1Ref.current) {
+          overlay1Ref.current.style.backgroundImage = `url(${backgroundImage})`;
+          overlay1Ref.current.classList.add('overlay-visible');
+          overlay2Ref.current.classList.remove('overlay-visible');
+          // Check text color based on the new background image
+          getTextColorForDynamicBackground(overlay1Ref.current, setTextColor);
+        }
+      } else {
+        if (overlay2Ref.current) {
+          overlay2Ref.current.style.backgroundImage = `url(${backgroundImage})`;
+          overlay2Ref.current.classList.add('overlay-visible');
+          overlay1Ref.current.classList.remove('overlay-visible');
+          // Check text color based on the new background image
+          getTextColorForDynamicBackground(overlay2Ref.current, setTextColor);
+        }
+      }
+      setUseOverlay1(!useOverlay1);
     }
-  }, 200); // Adjust the debounce delay if needed
+  }, 200);
 
-  // Navigate to the previous photo
   const handlePrevious = debounce(() => {
     if (hoveredColor) {
       const colorObj = colors.find((c) => c.name === hoveredColor);
@@ -82,7 +96,6 @@ const Palette = () => {
     }
   }, 200);
 
-  // Navigate to the next photo
   const handleNext = debounce(() => {
     if (hoveredColor) {
       const colorObj = colors.find((c) => c.name === hoveredColor);
@@ -96,6 +109,8 @@ const Palette = () => {
 
   return (
     <div className="flex flex-col justify-center gap-6 py-2">
+      <div ref={overlay1Ref} className="background-overlay"></div>
+      <div ref={overlay2Ref} className="background-overlay"></div>
       {colors.map((colorObj, index) => (
         <Circle
           key={index}
@@ -107,11 +122,11 @@ const Palette = () => {
           }}
         />
       ))}
-      <div className="flex justify-center align-middle mt-4 gap-6 text-black">
+      <div className="flex justify-center align-middle mt-4 gap-6">
         <button
           onClick={handlePrevious}
           style={{
-            backgroundColor: hoveredColor || "orange", 
+            backgroundColor: hoveredColor || "orange",
             transition: "background-color 0.5s ease-in-out, border-color 0.5s ease-in-out",
             border: "2px solid black",
           }}
@@ -123,7 +138,7 @@ const Palette = () => {
           onClick={handleNext}
           style={{
             backgroundColor: hoveredColor || "orange",
-            transition: "background-color 0.5s ease-in-out, border-color 0.5s ease-in-out", 
+            transition: "background-color 0.5s ease-in-out, border-color 0.5s ease-in-out",
             border: "2px solid black",
           }}
           className="flex justify-center px-4 py-2 hover:opacity-80 rounded-full shadow-md"
@@ -133,6 +148,10 @@ const Palette = () => {
       </div>
     </div>
   );
+};
+
+Palette.propTypes = {
+  setTextColor: PropTypes.string.isRequired
 };
 
 export default Palette;

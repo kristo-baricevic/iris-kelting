@@ -14,6 +14,7 @@ function App() {
 
   const updateTextColor = () => {
     setTimeout(() => {
+      console.log("sup");
       getTextColorForDynamicBackground((color) => {
         setTextColor(color);
       });
@@ -45,7 +46,7 @@ function App() {
         <h1 className="text-left text-5xl font-extrabold">Iris Kelting</h1>
         <MenuBar />
         <Routes>
-          <Route path="/" element={<Palette />} />
+          <Route path="/" element={<Palette setTextColor={setTextColor} />} />
           <Route path="/about" element={<About />} />
           <Route path="/video" element={<Video />} />
           <Route path="/contact" element={<Contact />} />
