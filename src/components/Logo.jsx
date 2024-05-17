@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const Logo = ({image}) => {
   return (
     <div className="circleImage">
@@ -11,8 +13,9 @@ const Logo = ({image}) => {
   );
 };
 
+Logo.propTypes = {
+    image: PropTypes.string.isRequired
+  };
+
 export default Logo;
 
-Logo.propTypes = {
-    image: Logo.string.isRequired
-} 
