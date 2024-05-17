@@ -4,8 +4,27 @@
   text-align: center;
 }
 
+
 .card {
-  padding: 2em;
+  position: relative;
+  background: white;
+  border: 4px solid black;
+  border-radius: 8px;
+  transform-style: preserve-3d;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border: 4px solid black;
+  background-color: gold;
+  bottom: -18px;
+  right: -18px;
+  border-radius: 8px;
+  transform: translateZ(-1px);
+  box-sizing: content-box; 
 }
 
 .read-the-docs {

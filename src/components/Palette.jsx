@@ -1,6 +1,6 @@
 // Palette.js
 import Circle from './Circle';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 // Import your local images
 import blue1 from '../assets/city_purple.jpeg';
@@ -46,7 +46,6 @@ const Palette = () => {
   // Track the currently hovered color and the current index
   const [hoveredColor, setHoveredColor] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const timeoutRef = useRef(null);
 
   // Preload all background images
   useEffect(() => {
@@ -70,20 +69,6 @@ const Palette = () => {
       document.body.style.backgroundRepeat = 'no-repeat';
     }
   }, 200); // Adjust the debounce delay if needed
-
-  // Reset the body background image to its original state
-  const resetBodyBackground = () => {
-    // Clear any existing timeouts to avoid conflicting timers
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-
-    // Set a timeout for the reset to occur after the transition
-    timeoutRef.current = setTimeout(() => {
-      document.body.style.transition = 'background-image 1s ease-in-out';
-      document.body.style.backgroundImage = '';
-    }, 200);
-  };
 
   // Navigate to the previous photo
   const handlePrevious = debounce(() => {
@@ -127,7 +112,7 @@ const Palette = () => {
           onClick={handlePrevious}
           style={{
             backgroundColor: hoveredColor || "orange", 
-            transition: "background-color 0.5s ease-in-out, border-color 0.5s ease-in-out", // Transition for background and border color
+            transition: "background-color 0.5s ease-in-out, border-color 0.5s ease-in-out",
             border: "2px solid black",
           }}
           className="flex justify-center px-4 py-2 hover:opacity-80 rounded-full shadow-md"
@@ -138,7 +123,7 @@ const Palette = () => {
           onClick={handleNext}
           style={{
             backgroundColor: hoveredColor || "orange",
-            transition: "background-color 0.5s ease-in-out, border-color 0.5s ease-in-out", // Transition for background and border color
+            transition: "background-color 0.5s ease-in-out, border-color 0.5s ease-in-out", 
             border: "2px solid black",
           }}
           className="flex justify-center px-4 py-2 hover:opacity-80 rounded-full shadow-md"
