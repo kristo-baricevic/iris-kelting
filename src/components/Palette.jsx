@@ -130,7 +130,7 @@ const Palette = ({ setTextColor }) => {
             transition: "background-color 0.5s ease-in-out, border-color 0.5s ease-in-out",
             border: "2px solid black",
           }}
-          className="flex justify-center px-4 py-2 hover:opacity-80 rounded-full shadow-md"
+          className="flex justify-center px-4 py-2 hover:opacity-80 rounded-full shadow-md text-black"
         >
           &larr; Previous
         </button>
@@ -141,7 +141,7 @@ const Palette = ({ setTextColor }) => {
             transition: "background-color 0.5s ease-in-out, border-color 0.5s ease-in-out",
             border: "2px solid black",
           }}
-          className="flex justify-center px-4 py-2 hover:opacity-80 rounded-full shadow-md"
+          className="flex justify-center px-4 py-2 hover:opacity-80 rounded-full shadow-md text-black"
         >
           Next &rarr;
         </button>
