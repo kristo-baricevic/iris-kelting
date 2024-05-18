@@ -1,6 +1,12 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+
 
 const Terms = () => {
+
+  useEffect(() => {
+    document.body.style.background = '#4a7cf2'; 
+  }, []);
 
     const navigate = useNavigate();
 

@@ -6,7 +6,6 @@ const ContactForm = () => {
 
   useEffect(() => {
     document.body.style.background = '#77DD77'; 
-    
   }, []);
 
   const [formData, setFormData] = useState({
