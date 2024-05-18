@@ -5,7 +5,8 @@ import { useEffect } from 'react';
 const Video = () => {
     useEffect(() => {
         document.body.style.background = '#BBAACB'; 
-      }, []);
+        // document.body.classList.add("pattern-3");
+    }, []);
     
   return (
     

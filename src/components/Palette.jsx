@@ -4,7 +4,6 @@ import { getTextColorForDynamicBackground } from '../utils/backgroundUtils';
 import PropTypes from 'prop-types';
 import cameraImage from '../assets/iris_camera.png'; 
 
-
 // Import your local images
 import blue1 from '../assets/city_purple.jpeg';
 import blue2 from '../assets/blue2.jpeg';
