@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const ContactForm = () => {
 
   useEffect(() => {
-    document.body.style.background = '#9999FF'; 
+    document.body.style.background = '#49d93f'; 
   }, []);
 
   const [formData, setFormData] = useState({
