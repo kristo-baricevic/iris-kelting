@@ -6,6 +6,7 @@ const MenuBar = () => {
       <Link to="/">Home </Link>
       <Link to="/about">About </Link>
       <Link to="/video">Video </Link>
+      <Link to="/modeling">Modeling </Link>
       <Link to="/contact">Contact </Link>
     </div>
   );

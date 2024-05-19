@@ -8,6 +8,7 @@ import Contact from './components/Contact';
 import Terms from './components/Terms';
 import './App.css';
 import { getTextColorForDynamicBackground } from './utils/backgroundUtils';
+import ModelingPortfolio from './components/ModelingPortfolio';
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
           <Route path="/video" element={<Video />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/modeling" element={<ModelingPortfolio />} />
         </Routes>
       </div>
     </Router>
